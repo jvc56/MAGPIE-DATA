@@ -27,7 +27,8 @@ for version_dir in "$VERSIONED_DIR"/*; do
     cp -RL "$version_dir" "$temp_dir/testdata"
 
     # Create tarball from the renamed directory
-    tar -czf "$output_file" -C "$temp_dir" "testdata"
+    # Use --no-xattrs to exclude macOS extended attributes (._* files)
+    tar --no-xattrs -czf "$output_file" -C "$temp_dir" "testdata"
 
     # Split into 40MB chunks if larger than 40MB
     file_size=$(stat -f%z "$output_file" 2>/dev/null || stat -c%s "$output_file" 2>/dev/null)
