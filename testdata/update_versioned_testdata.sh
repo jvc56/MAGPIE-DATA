@@ -26,6 +26,11 @@ for version_dir in "$VERSIONED_DIR"/*; do
     # Using cp -RL to follow symlinks
     cp -RL "$version_dir" "$temp_dir/testdata"
 
+    # Remove extended attributes on macOS to prevent ._* files
+    if command -v xattr >/dev/null 2>&1; then
+        xattr -rc "$temp_dir/testdata" 2>/dev/null || true
+    fi
+
     # Create tarball from the renamed directory
     # Use --no-xattrs to exclude macOS extended attributes (._* files)
     tar --no-xattrs -czf "$output_file" -C "$temp_dir" "testdata"
