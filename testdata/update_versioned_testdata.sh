@@ -28,12 +28,13 @@ for version_dir in "$VERSIONED_DIR"/*; do
 
     # Remove extended attributes on macOS to prevent ._* files
     if command -v xattr >/dev/null 2>&1; then
-        xattr -rc "$temp_dir/testdata" 2>/dev/null || true
+        xattr -r -clear "$temp_dir/testdata" 2>/dev/null || true
     fi
 
     # Create tarball from the renamed directory
-    # Use --no-xattrs to exclude macOS extended attributes (._* files)
-    tar --no-xattrs -czf "$output_file" -C "$temp_dir" "testdata"
+    # Use --no-xattrs to exclude macOS extended attributes
+    # Set COPYFILE_DISABLE=1 to prevent ._* AppleDouble files on macOS
+    COPYFILE_DISABLE=1 tar --no-xattrs -czf "$output_file" -C "$temp_dir" "testdata"
 
     # Split into 40MB chunks if larger than 40MB
     file_size=$(stat -f%z "$output_file" 2>/dev/null || stat -c%s "$output_file" 2>/dev/null)
