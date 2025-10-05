@@ -29,10 +29,21 @@ for version_dir in "$VERSIONED_DIR"/*; do
     # Create tarball from the renamed directory
     tar -czf "$output_file" -C "$temp_dir" "testdata"
 
+    # Split into 40MB chunks if larger than 40MB
+    file_size=$(stat -f%z "$output_file" 2>/dev/null || stat -c%s "$output_file" 2>/dev/null)
+    chunk_size=$((40 * 1024 * 1024))  # 40MB in bytes
+
+    if [ "$file_size" -gt "$chunk_size" ]; then
+      echo "Tarball is $(($file_size / 1024 / 1024))MB, splitting into 40MB chunks..."
+      split -b 40m "$output_file" "${output_file}."
+      rm "$output_file"
+      echo "Created chunks: ${output_file}.*"
+    else
+      echo "Created $output_file ($(($file_size / 1024 / 1024))MB, no splitting needed)"
+    fi
+
     # Clean up temp directory
     rm -rf "$temp_dir"
-
-    echo "Created $output_file"
   fi
 done
 
