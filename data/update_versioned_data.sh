@@ -26,6 +26,27 @@ for version_dir in "$VERSIONED_DIR"/*; do
     # Using cp -RL to follow symlinks
     cp -RL "$version_dir" "$temp_dir/data"
 
+    # cp -RL dereferences every symlink, including ones that only exist to
+    # avoid duplicating a file within data/lexica or data/strategy (e.g. a
+    # lexicon edition symlinked to another edition's leaves/PAT because it
+    # ships the same weights). Those are safe to restore as real symlinks
+    # in the tarball: both the link and its target live in the same
+    # directory, so they resolve correctly no matter where the tarball is
+    # extracted. Symlinks whose target escapes their directory (like
+    # data/versioned/*/lexica -> ../../lexica, which points outside this
+    # snapshot into the live repo tree) must stay dereferenced, since that
+    # path will not exist for someone who only has the extracted tarball.
+    find "$SCRIPT_DIR" -type l | while read -r link; do
+      target=$(readlink "$link")
+      case "$target" in
+        */*) continue ;;  # escapes its directory -- keep dereferenced
+      esac
+      rel="${link#"$SCRIPT_DIR"/}"
+      if [ -e "$temp_dir/data/$rel" ] || [ -L "$temp_dir/data/$rel" ]; then
+        ln -sf "$target" "$temp_dir/data/$rel"
+      fi
+    done
+
     # Remove extended attributes on macOS to prevent ._* files
     if command -v xattr >/dev/null 2>&1; then
         xattr -r -clear "$temp_dir/data" 2>/dev/null || true

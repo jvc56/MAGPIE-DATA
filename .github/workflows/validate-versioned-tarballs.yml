@@ -44,6 +44,22 @@ jobs:
               temp_versioned=$(mktemp -d)
               cp -RL "$version_dir" "$temp_versioned/data"
 
+              # Match update_versioned_data.sh: restore same-directory
+              # symlinks (e.g. a lexicon's leaves/PAT symlinked to another
+              # edition's) that cp -RL dereferenced, since the tarball is
+              # expected to keep those as real symlinks. Symlinks whose
+              # target escapes their directory stay dereferenced.
+              find data -type l | while read -r link; do
+                target=$(readlink "$link")
+                case "$target" in
+                  */*) continue ;;
+                esac
+                rel="${link#data/}"
+                if [ -e "$temp_versioned/data/$rel" ] || [ -L "$temp_versioned/data/$rel" ]; then
+                  ln -sf "$target" "$temp_versioned/data/$rel"
+                fi
+              done
+
               # Compare the directories
               if diff -r "$temp_extract/data" "$temp_versioned/data" > /dev/null; then
                 echo "✅ data-${version_name}.tgz matches versioned source"
