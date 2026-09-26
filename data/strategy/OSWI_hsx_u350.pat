@@ -1,0 +1,1 @@
+CSW24_hsx_u350.pat
