@@ -1,5 +1,5 @@
 magpie_pat_v5
-# OSPS49_super21_hsx_u350: hook-score v5 recipe (one seed, 61000001) for OSPS49 on the
+# OSPS49_super21: PAT weights (one training seed, 61000001) for OSPS49 on the
 # 21x21 board (polish_super, leaves OSPS49_super21), its own opening table (300
 # racks) and utility_adjust,350.
 gamma,0.500000

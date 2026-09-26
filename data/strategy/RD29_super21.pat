@@ -1,5 +1,5 @@
 magpie_pat_v5
-# RD29_super21_hsx_u350: hook-score v5 recipe (one seed, 61000001) for RD29 on the
+# RD29_super21: PAT weights (one training seed, 61000001) for RD29 on the
 # 21x21 board (german_super, leaves RD29_super21), its own opening table (300
 # racks) and utility_adjust,350.
 gamma,0.500000
