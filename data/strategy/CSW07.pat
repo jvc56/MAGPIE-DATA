@@ -1,45 +1,6 @@
 magpie_pat_v5
-# Published in this repo as CSW07.pat; internal name during development was CSW07_release.
-# CSW07_release: PAT for CSW07 by the incumbent-preserving selection
-# (test/pat_select_champion.sh, codex/pat-setup-value, 2026-09-15).
-# Incumbent: CSW24_v5 (sha256 832dd6855f021e96). Runtime tables: -wmp true -rit true -ritmmap true -wit true.
-#   shrink_lambda,fit_mse,validation_mse_refit_intercept,validation_mse_fit_intercept,file
-#   0,544.783482,546.347981,555.412617,CSW07_release_adapt_gen_1_shrink0
-#   1,544.799596,546.220648,553.714495,CSW07_release_adapt_gen_1_shrink1
-#   10,544.923388,546.029139,550.345173,CSW07_release_adapt_gen_1_shrink10
-#   100,545.268392,546.099142,547.196138,CSW07_release_adapt_gen_1_shrink100
-#   1000,545.670958,546.254657,546.395642,CSW07_release_adapt_gen_1_shrink1000
-#   10000,546.163395,546.572739,546.582798,CSW07_release_adapt_gen_1_shrink10000
-#   100000,546.310060,546.655507,546.656761,CSW07_release_adapt_gen_1_shrink100000
-#   inf,-,546.655507,-,CSW07_release_adapt_gen_1_shrinkinf
-#   Installed: the loaded weights (inf); select among the candidates by whole-game play.
-# Screening vs the incumbent on CSW07, dev seed 778001930, 500000 mirrored pairs:
-#   pat_dls_champion_v5: mean -0.0280, SE 0.0704, 95% CI [-0.1660, 0.1099] (500000 pairs)
-#   CSW07_release_s1_v4: mean -0.3202, SE 0.0871, 95% CI [-0.4909, -0.1496] (500000 pairs)
-#   CSW07_release_s2_v4: mean -0.4334, SE 0.0967, 95% CI [-0.6230, -0.2438] (500000 pairs)
-#   CSW07_release_s3_v4: mean -0.2543, SE 0.0879, 95% CI [-0.4266, -0.0820] (500000 pairs)
-#   CSW07_release_adapt_gen_1_shrink10: mean -0.1942, SE 0.0852, 95% CI [-0.3612, -0.0272] (500000 pairs)
-#   CSW07_release_adapt_gen_1_shrink100: mean -0.0934, SE 0.0846, 95% CI [-0.2593, 0.0725] (500000 pairs)
-#   CSW07_release_adapt_gen_1_shrink1000: mean 0.0070, SE 0.0664, 95% CI [-0.1231, 0.1371] (500000 pairs)
-# Challenger: CSW07_release_adapt_gen_1_shrink1000 as is.
-# Confirmation vs the incumbent, untouched seed 778001935, 1000000 pairs: mean 0.0376, SE 0.0473, 95% CI [-0.0551, 0.1304] (1000000 pairs)
-# Decision: incumbent retained: challenger CSW07_release_adapt_gen_1_shrink1000 did not confirm.
-# Validation vs no PAT on CSW07, seed 778001937, 500000 pairs: mean 3.2932, SE 0.1357, 95% CI [3.0272, 3.5592] (500000 pairs)
-# Rows below are byte-identical to CSW24_v5; its own provenance:
-# | CSW24_v5: PAT champion for CSW24 by the v5 recipe
-# | (notes/pat_champion_recipe.md, codex/pat-setup-value). Weights: the
-# | best of 4 seeds (61000002 + i - 1) of the iterative recipe (5 x 30K
-# | games from pat_zero_lexsigned_nofit) with the 14 float_through_*
-# | weights refitted under run_through,1 (150K games, seed 4242,
-# | fit_residual 3 during that fit). Tournament, whole game, 500000
-# | mirrored pairs, per pair:
-# |   seed 2 vs seed 1: mean -0.2221, SE 0.0870, 95% CI [-0.3927, -0.0515] (500000 pairs)
-# |   seed 3 vs seed 1: mean -0.1446, SE 0.0821, 95% CI [-0.3056, 0.0163] (500000 pairs)
-# |   seed 4 vs seed 1: mean -0.2871, SE 0.0909, 95% CI [-0.4654, -0.1089] (500000 pairs)
-# |   winner: seed 1
-# | Opening table: sim - static by tiles on 1000 seeded opening racks
-# | (patopeningsim:CSW24:CSW24_v5_s1_v4:1000), relative to the best bin.
-# | Validation vs no PAT (seed 777100099, 500000 pairs): mean 3.3187, SE 0.1363, 95% CI [3.0515, 3.5859] (500000 pairs)
+# CSW07: PAT weights (one training seed, 63000009) for CSW07, leaves CSW07,
+# its own opening table (1000 racks) and utility_adjust,350.
 gamma,0.500000
 own_asset_discount,0.000000
 lexicon_floaters,1
@@ -47,46 +8,47 @@ signed_through,1
 fit_scaled,0
 train_overlay,0
 fit_residual,0
-exact_created_hooks,0
+exact_created_hooks,1
 run_through,1
+fit_shrink,0
 stage_scale_early,1.000000
 stage_scale_mid,1.000000
 stage_scale_late,1.000000
-hook_d1,-107
-hook_d2,-37
-hook_d3,-24
-hook_d4,-24
-hook_d5,-26
-hook_d6,-24
-hook_d7,-27
-float_flex_d1,0
-float_flex_d2,-18
-float_flex_d3,0
-float_flex_d4,0
-float_flex_d5,-12
-float_flex_d6,-2
-float_flex_d7,-7
-float_score_d1,-76
-float_score_d2,-64
-float_score_d3,-86
-float_score_d4,-51
-float_score_d5,-21
-float_score_d6,-28
-float_score_d7,-43
+hook_d1,-29
+hook_d2,-16
+hook_d3,-10
+hook_d4,-11
+hook_d5,-9
+hook_d6,-10
+hook_d7,-7
+float_flex_d1,-12
+float_flex_d2,-15
+float_flex_d3,-1
+float_flex_d4,-7
+float_flex_d5,-8
+float_flex_d6,0
+float_flex_d7,-6
+float_score_d1,-1
+float_score_d2,-5
+float_score_d3,0
+float_score_d4,0
+float_score_d5,0
+float_score_d6,0
+float_score_d7,-3
 float_through_score_d1,0
 float_through_score_d2,0
 float_through_score_d3,0
 float_through_score_d4,0
 float_through_score_d5,0
-float_through_score_d6,0
-float_through_score_d7,0
+float_through_score_d6,-6
+float_through_score_d7,-1
 float_through_count_d1,0
-float_through_count_d2,-7
-float_through_count_d3,-2
-float_through_count_d4,-13
-float_through_count_d5,-8
-float_through_count_d6,0
-float_through_count_d7,-17
+float_through_count_d2,-3
+float_through_count_d3,0
+float_through_count_d4,-2
+float_through_count_d5,-2
+float_through_count_d6,-1
+float_through_count_d7,-4
 hook_scaled_d1,0
 hook_scaled_d2,0
 hook_scaled_d3,0
@@ -101,55 +63,55 @@ float_flex_scaled_d4,0
 float_flex_scaled_d5,0
 float_flex_scaled_d6,0
 float_flex_scaled_d7,0
-hook_score_d1,0
-hook_score_d2,0
-hook_score_d3,0
-hook_score_d4,0
-hook_score_d5,0
-hook_score_d6,0
-hook_score_d7,0
-dws_hook_d1,-28
-dws_hook_d2,-9
-dws_hook_d3,-13
-dws_hook_d4,0
-dws_hook_d5,-2
-dws_hook_d6,0
+hook_score_d1,-28
+hook_score_d2,-21
+hook_score_d3,-13
+hook_score_d4,-17
+hook_score_d5,-15
+hook_score_d6,-14
+hook_score_d7,-10
+dws_hook_d1,-15
+dws_hook_d2,-8
+dws_hook_d3,-9
+dws_hook_d4,-5
+dws_hook_d5,-4
+dws_hook_d6,-4
 dws_hook_d7,-5
 dws_float_score_d1,0
-dws_float_score_d2,-1
-dws_float_score_d3,-22
-dws_float_score_d4,-24
-dws_float_score_d5,-8
-dws_float_score_d6,-21
-dws_float_score_d7,-46
-tls_hook_d1,-27
-tls_hook_d2,0
-tls_hook_d3,-12
-tls_hook_d4,-7
-tls_hook_d5,0
-tls_hook_d6,-18
-tls_hook_d7,-2
+dws_float_score_d2,0
+dws_float_score_d3,-9
+dws_float_score_d4,-7
+dws_float_score_d5,-9
+dws_float_score_d6,-29
+dws_float_score_d7,-23
+tls_hook_d1,-10
+tls_hook_d2,-4
+tls_hook_d3,-5
+tls_hook_d4,-5
+tls_hook_d5,-6
+tls_hook_d6,-9
+tls_hook_d7,-5
 tls_float_score_d1,0
-tls_float_score_d2,-16
-tls_float_score_d3,-38
-tls_float_score_d4,-9
-tls_float_score_d5,-13
-tls_float_score_d6,-5
-tls_float_score_d7,-1
-dls_hook_d1,-9
-dls_hook_d2,-1
-dls_hook_d3,-13
+tls_float_score_d2,-9
+tls_float_score_d3,-17
+tls_float_score_d4,0
+tls_float_score_d5,-3
+tls_float_score_d6,-4
+tls_float_score_d7,-10
+dls_hook_d1,-7
+dls_hook_d2,-3
+dls_hook_d3,-6
 dls_hook_d4,-4
-dls_hook_d5,-10
-dls_hook_d6,0
-dls_hook_d7,-4
-dls_float_score_d1,-2
-dls_float_score_d2,-19
-dls_float_score_d3,-4
-dls_float_score_d4,-26
+dls_hook_d5,-6
+dls_hook_d6,-3
+dls_hook_d7,-7
+dls_float_score_d1,0
+dls_float_score_d2,-7
+dls_float_score_d3,0
+dls_float_score_d4,-10
 dls_float_score_d5,0
 dls_float_score_d6,0
-dls_float_score_d7,0
+dls_float_score_d7,-8
 qws_hook_d1,0
 qws_hook_d2,0
 qws_hook_d3,0
@@ -178,15 +140,15 @@ qls_float_score_d4,0
 qls_float_score_d5,0
 qls_float_score_d6,0
 qls_float_score_d7,0
-tt_floater,-63
+tt_floater,-20
 tt_hook_only,0
-dd_floater,-102
-dd_hook_only,-53
-dd_tiles_saved,-65
+dd_floater,-388
+dd_hook_only,-571
+dd_tiles_saved,-23
 w6_floater,0
 w6_hook_only,0
 w6_tiles_saved,0
-w9_floater,-93
+w9_floater,-2508
 w9_hook_only,0
 w9_tiles_saved,0
 w12_floater,0
@@ -220,10 +182,11 @@ dws_lm_ext_d4,0
 dws_lm_ext_d5,0
 dws_lm_ext_d6,0
 dws_lm_ext_d7,0
-opening_tiles_2,0
-opening_tiles_3,-1296
-opening_tiles_4,-1496
-opening_tiles_5,-2060
-opening_tiles_6,-1975
-opening_tiles_7,-2175
-opening_exchange,-220
+opening_tiles_2,-1821
+opening_tiles_3,-2874
+opening_tiles_4,-3106
+opening_tiles_5,-3761
+opening_tiles_6,-3365
+opening_tiles_7,-2995
+opening_exchange,0
+utility_adjust,350
