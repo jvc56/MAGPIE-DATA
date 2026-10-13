@@ -139,4 +139,3 @@ core tests and commands use this checkout explicitly. Existing
 `download_data.sh` archives do not contain these files, even after this PR
 merges. Core CI checks out the pinned six-asset commit directly, so no archive
 publication or further data change is needed to test or merge the core codec.
-
