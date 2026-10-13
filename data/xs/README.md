@@ -17,7 +17,7 @@ one million native static-equity games per lexicon:
 CSW24 is the shared English default and can encode NWL positions; NWL23 is an
 optional separately trained model. A position's rules lexicon does not select
 its word codebook implicitly: encoded data must identify the book used. These
-files are for word-based XSP. The current XSG pilot uses static move ranks and
+files are for word-based XSP. Native XSG uses static move ranks and
 does not need a separate trained word book or draw-frequency file.
 
 `manifest.json` records each stable path, byte length, and SHA256. The XS
@@ -88,7 +88,55 @@ bundles that offer XS support must include `data/xs` and either retain its
 relative links with their targets or dereference them into frozen files. Keep
 every published profile in those bundles.
 
-Ranked XSG decoding must also pin its engine/ranking contract and standard board
-and tile-distribution inputs. Preserving KWG/KLV2 bytes is necessary but does
-not by itself guarantee that a different engine version generates identical
-move ranks. Word-based XSP should use the immutable codebooks provided here.
+## Native MAGPIE contract
+
+Native MAGPIE uses XSP wire version **5** and XSG wire version **2**. The older
+browser position formats and research-pilot game format are separate versions;
+these assets do not implicitly migrate old tokens.
+
+| Native field | ID | Frozen assets |
+| --- | ---: | --- |
+| XSP word codebook | 1 | `english-v1/CSW24.xsw.json.gz` (`en-CSW24-v1`) |
+| XSP word codebook | 2 | `english-v1/NWL23.xsw.json.gz` (`en-NWL23-v1`) |
+| XSG static-rank profile | 1 | `english-v1/CSW24.kwg` and `CSW24.klv2` |
+| XSG static-rank profile | 2 | `english-v1/NWL23.kwg` and `NWL23.klv2` |
+
+The position's rules lexicon and the compression model are separately encoded.
+Native loaders verify the exact checksums in this manifest. An XSG profile of
+0 uses only explicit moves; a packed XSP board also needs no external assets.
+All six assets above are sufficient for the native English codecs. No trained
+draw table, WMP, WIT, RIT, or extra board/distribution file is needed.
+
+The core codec embeds the standard 15×15 premium layout, English tile counts
+and scores, and 50-point bingo bonus. Its rank ordering is descending integer
+`move score + KLV leave value`, then ascending start square, orientation, and
+ASCII play-through spelling (lowercase blanks). It ranks only placements and
+keeps ranks 0–1023. Draw-combination weights are calculated from the remaining
+tile inventory. Native compatibility fixtures freeze both profiles' candidate
+ordering. A future engine correction that changes that ordering must preserve
+the old implementation or introduce a new profile/format ID; keeping the data
+unchanged alone is not sufficient to preserve rank decoding.
+
+Native commands (run from a built MAGPIE checkout):
+
+```sh
+./bin/magpie conv counts2xsw csw24-million-word-counts.tsv.gz /tmp/CSW24.xsw.json.gz CSW24
+./bin/magpie conv counts2xsw nwl23-million-word-counts.tsv.gz /tmp/NWL23.xsw.json.gz NWL23
+./bin/magpie conv cgp2xsp position.cgp position.xsp CSW24 20 -path /path/to/MAGPIE-DATA/data:data
+./bin/magpie conv xsp2cgp position.xsp restored.cgp -path /path/to/MAGPIE-DATA/data:data
+./bin/magpie conv gcg2xsg game.gcg.gz game.xsg CSW24 -path /path/to/MAGPIE-DATA/data:data
+./bin/magpie conv xsg2gcg game.xsg restored.gcg -path /path/to/MAGPIE-DATA/data:data
+```
+
+The native builder reproduces both published codebooks byte for byte from the
+original million-game count files. Arbitrary training inputs produce candidate
+books; they do not replace the registered v1 identities. See [MAGPIE core PR #801](https://github.com/jvc56/MAGPIE/pull/801) and its
+[`docs/xs-codecs.md`](https://github.com/jvc56/MAGPIE/blob/codex/core-xs-codecs/docs/xs-codecs.md)
+for the full bit-level format and test commands.
+
+Merge this data PR **before** the core PR. Until a new data release bundles XS,
+core tests and commands use this checkout explicitly. Existing
+`download_data.sh` archives do not contain these files, even after this PR
+merges. Core CI checks out the pinned six-asset commit directly, so no archive
+publication or further data change is needed to test or merge the core codec.
+
