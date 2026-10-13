@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "files": {
+    "english-v1/NWL23.kwg": {
+      "sha256": "3e74af981fdd974e107283f686da0fe4b7ec84ad0d825d444330c338c33b91ba",
+      "bytes": 4719596
+    },
+    "english-v1/NWL23.klv2": {
+      "sha256": "37dea945c29c3773eb4cd5a4117f3d3256c8b548cd3bf3b5ce8a219cb5e0a3fa",
+      "bytes": 3667340
+    },
+    "english-v1/CSW24.kwg": {
+      "sha256": "62ca7a84f07429a9976f77a4f74b94911aca5d49cce050dce72dd0e032c0566f",
+      "bytes": 5970396
+    },
+    "english-v1/CSW24.klv2": {
+      "sha256": "b0ef5f6637cca0cd8e0962d6fb7d35b2d22f9bf648015f48fa8f80e24a60610b",
+      "bytes": 3667340
+    },
+    "english-v1/CSW24.xsw.json.gz": {
+      "sha256": "b23a65ddc28ff8452c9f012fae7692a60afd9897948f320abff1b5827cee566f",
+      "bytes": 604693
+    },
+    "english-v1/NWL23.xsw.json.gz": {
+      "sha256": "697ea8a8c81ec7ba3cbc36428ad897eafdfabd4f89f53d30b5eaeebcb1936453",
+      "bytes": 455807
+    }
+  }
+}
