@@ -1,0 +1,24 @@
+name: Validate XS Data
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  immutable-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check preserved XS identities against the base revision
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE_SHA" ] && [ "$BASE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+            python3 data/validate_xs_data.py --base-ref "$BASE_SHA"
+          else
+            python3 data/validate_xs_data.py
+          fi
+      - name: Verify target updates and frozen copies
+        run: python3 -m unittest discover -s data -p test_validate_xs_data.py -v
