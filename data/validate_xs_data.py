@@ -2,10 +2,13 @@
 """Verify immutable XS data identities and their resolved file contents."""
 
 import argparse
+import gzip
 import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import subprocess
+
+from xs_codebook import validate_codebook
 
 
 MANIFEST_PATH = 'data/xs/manifest.json'
@@ -35,6 +38,8 @@ def validate(root, manifest, previous=None):
                 f'XS data changed: {name}. Preserve its original bytes at the XS '
                 'path before updating the live target; do not update its checksum.'
             )
+        if name.endswith('.xsw.json.gz'):
+            validate_codebook(json.loads(gzip.decompress(raw)))
 
 
 def previous_manifest(repo, ref):

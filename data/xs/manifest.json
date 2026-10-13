@@ -16,6 +16,14 @@
     "english-v1/CSW24.klv2": {
       "sha256": "b0ef5f6637cca0cd8e0962d6fb7d35b2d22f9bf648015f48fa8f80e24a60610b",
       "bytes": 3667340
+    },
+    "english-v1/CSW24.xsw.json.gz": {
+      "sha256": "b23a65ddc28ff8452c9f012fae7692a60afd9897948f320abff1b5827cee566f",
+      "bytes": 604693
+    },
+    "english-v1/NWL23.xsw.json.gz": {
+      "sha256": "697ea8a8c81ec7ba3cbc36428ad897eafdfabd4f89f53d30b5eaeebcb1936453",
+      "bytes": 455807
     }
   }
 }

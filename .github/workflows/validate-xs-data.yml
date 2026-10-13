@@ -22,3 +22,5 @@ jobs:
           fi
       - name: Verify target updates and frozen copies
         run: python3 -m unittest discover -s data -p test_validate_xs_data.py -v
+      - name: Verify canonical word codebooks
+        run: python3 -m unittest discover -s data -p test_xs_codebook.py -v
