@@ -1,0 +1,14 @@
+# Pre-endgame adjustments: TWL06, endgames solved 2 plies deep: static table from 40 fits of 1000 games x 16 rollouts, plus solved minus static on the games of seeds 1 and 2.
+# index,value (points)
+1,12.21
+2,8.82
+3,2.92
+4,-0.79
+5,-2.75
+6,-4.31
+7,-2.59
+8,13.33
+9,12.28
+10,8.70
+11,4.01
+12,0.72
