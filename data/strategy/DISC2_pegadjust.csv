@@ -1,0 +1,14 @@
+# Pre-endgame adjustments: DISC2, endgames solved 2 plies deep: static table from 40 fits of 1000 games x 16 rollouts, plus solved minus static on the games of seeds 1 and 2.
+# index,value (points)
+1,1.32
+2,-3.85
+3,-7.45
+4,-9.72
+5,-11.86
+6,-13.96
+7,-10.96
+8,14.76
+9,14.69
+10,10.77
+11,5.28
+12,1.16

@@ -1,0 +1,14 @@
+# Pre-endgame adjustments: FRA20, endgames solved 2 plies deep: static table from 40 fits of 1000 games x 16 rollouts, plus solved minus static on the games of seeds 1 and 2.
+# index,value (points)
+1,13.30
+2,8.22
+3,2.87
+4,-0.27
+5,-2.78
+6,-4.54
+7,-3.67
+8,15.68
+9,14.16
+10,9.33
+11,4.17
+12,1.07

@@ -1,0 +1,14 @@
+# Pre-endgame adjustments: OSW1, endgames solved 2 plies deep: static table from 40 fits of 1000 games x 16 rollouts, plus solved minus static on the games of seeds 1 and 2.
+# index,value (points)
+1,11.58
+2,6.37
+3,1.31
+4,-2.19
+5,-3.78
+6,-4.67
+7,-3.04
+8,12.66
+9,11.91
+10,8.16
+11,3.17
+12,0.16

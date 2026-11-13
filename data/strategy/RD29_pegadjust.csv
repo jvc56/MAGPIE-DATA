@@ -1,0 +1,14 @@
+# Pre-endgame adjustments: RD29, endgames solved 2 plies deep: static table from 40 fits of 1000 games x 16 rollouts, plus solved minus static on the games of seeds 1 and 2.
+# index,value (points)
+1,13.39
+2,7.86
+3,4.73
+4,2.18
+5,0.92
+6,0.23
+7,1.69
+8,13.92
+9,10.79
+10,6.02
+11,2.68
+12,1.00
