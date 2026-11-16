@@ -11,7 +11,7 @@ exact_fresh_runs,1
 run_through,1
 stage_scale_early,1.000000
 stage_scale_mid,1.000000
-stage_scale_late,1.000000
+stage_scale_late,1.750000
 hook_d1,-28
 hook_d2,-15
 hook_d3,-13
