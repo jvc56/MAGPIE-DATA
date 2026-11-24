@@ -1,0 +1,14 @@
+# Inference temperatures by bag: the softmax temperature, in points, for
+# inferring the opponent's leave, by the number of tiles in the bag before
+# their play; interpolated in log temperature between rows, flat outside them.
+# Fitted on CSW24 self-play (4-ply simulation player) by the likelihood of the
+# leave really kept; NWL23 and FRA20 fits agree within 0.04 nats per move.
+# bag,temperature
+4,12
+10,6
+17,5
+25,4
+38,3
+53,2
+75,1.5
+exchange,3
